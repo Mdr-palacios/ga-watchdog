@@ -17,12 +17,12 @@ step. See ADR-0004 (forthcoming) for why.
 from __future__ import annotations
 
 from datetime import date
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
 
-class MeetingType(str, Enum):
+class MeetingType(StrEnum):
     """SEB meetings come in a small number of named shapes."""
 
     REGULAR = "Regular"
@@ -33,7 +33,7 @@ class MeetingType(str, Enum):
     EXECUTIVE_SESSION = "Executive Session"
 
 
-class ComplianceStatus(str, Enum):
+class ComplianceStatus(StrEnum):
     """Open Meetings Act compliance posture for a single meeting.
 
     `Compliant` is the default-positive. `Notice Concerns` flags a meeting
@@ -57,14 +57,20 @@ class Meeting(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    meeting_id: int = Field(..., description="Stable ascending integer; assigned by warehouse, not by source.")
+    meeting_id: int = Field(
+        ..., description="Stable ascending integer; assigned by warehouse, not by source."
+    )
     meeting_date: date
     day_of_week: str = Field(..., max_length=3, description="Mon / Tue / Wed / ...")
     meeting_type: MeetingType
     meeting_format: str = Field(..., description="In-person + YouTube, Zoom + YouTube, etc.")
     chair: str
-    members_present: str = Field(..., description="Free text — comma-separated names with annotations like '(partial)'.")
-    quorum_met: str = Field(..., description="Free text — 'Yes', 'Yes (3, then 4)', 'No', etc. Not boolean on purpose.")
+    members_present: str = Field(
+        ..., description="Free text — comma-separated names with annotations like '(partial)'."
+    )
+    quorum_met: str = Field(
+        ..., description="Free text — 'Yes', 'Yes (3, then 4)', 'No', etc. Not boolean on purpose."
+    )
     agenda_summary: str | None = None
     key_decisions: str | None = None
     video_url: HttpUrl | None = None

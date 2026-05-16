@@ -14,14 +14,14 @@ The lessons are deliberately *political* as well as technical. The whole premise
 
 ### Working with unreliable sources
 
-- *L04 — How to absorb format drift without breaking downstream.* Coming with Phase 1 SEB ingestion.
-- *L05 — When to fail loudly vs. quarantine vs. coerce.* Coming with Phase 2 voter file ingestion.
-- *L06 — Schema contracts: writing the test you wish the upstream had.* Coming with the first schema contract test.
+- **L04 — How to absorb format drift without breaking downstream.** [Phase 1 SEB ingestion](../../pipelines/seb_meetings/sources/youtube_rss.py) demonstrates this with the YouTube RSS feed: titles take five different shapes ("April 15, 2026", "03.18.26", "12.09.25 Part 2"), and the parser handles each as a separate, documented case. Unknown shapes return `meeting_date=None` and surface for human review rather than being silently dropped. See `_PATTERNS` for the explicit list of accepted formats. The lesson: format drift is permanent, so name every shape you accept and *leave the unknowns visible*.
+- **L05 — When to fail loudly vs. quarantine vs. coerce.** The SEB pipeline does all three on purpose: (a) **Fail loudly** when YouTube changes the feed structure — `parse_feed` raises `ValueError` if `<yt:videoId>` is missing because we'd rather break and patch than silently lose data. (b) **Quarantine** unknown title formats — they make it into `seb.videos` with `meeting_date=None` and a fixable row, not the trash. (c) **Coerce** loose date strings in the Controversies sheet (`2026-04` → `2026-04-01`) because the workbook author meant "April 2026" and pretending otherwise helps nobody. The rule: fail when the data *contract* breaks, quarantine when the *content* surprises you, coerce when the *encoding* is the only thing wrong.
+- **L06 — Schema contracts: writing the test you wish the upstream had.** The Pydantic `Meeting` model is the contract. It enforces enum membership on `meeting_type`, bounded floats on `hours_logged`, URL parsing on `video_url`, and `extra="forbid"` so an unexpected column raises instead of silently passing through. The warehouse mirrors the same constraints in SQL (`CHECK (hours_logged ... <= 24)`), and `test_hours_check_constraint_actually_works` proves the SQL constraint is wired — not just the Python. See [`pipelines/seb_meetings/tests/`](../../pipelines/seb_meetings/tests/). The lesson: enforce the same invariant at every layer it can be enforced at, and write a test that proves each layer enforces it. Upstream will never write that test for you.
 
 ### Politics inside pipelines
 
-- *L07 — "Clean" is a choice. Whose definition?* Coming with the first compliance-flag transform.
-- *L08 — When the qualitative columns matter more than the quantitative ones.* Coming with the controversies model.
+- **L07 — "Clean" is a choice. Whose definition?** Live example from the v0 workbook: meeting #1 (May 14, 2026) has a video link to `h_0CXACXv9A` — a real YouTube video, but actually the **April 22** SEB meeting, not May 14. A pipeline could (a) silently "fix" it on ingest using YouTube as a tiebreaker, (b) flag it, or (c) preserve the workbook value as-is. We chose (c), because the workbook is the human-curated system of record in Phase 1, and silently rewriting it would erase the data-quality signal. `fill_missing_video_urls_from_rss` only fills `NULL`s — never overwrites. A separate, auditable corrections workflow handles known errors with full provenance. See [`warehouse/loader.py`](../../warehouse/loader.py) `fill_missing_video_urls_from_rss`. **The lesson: "clean" is whatever your downstream readers will assume the data already is. Every implicit fix is a political act — make them explicit instead.**
+- **L08 — When the qualitative columns matter more than the quantitative ones.** The `controversies`, `compliance_notes`, and `key_decisions` columns on `seb.meetings` are free-text and *not* auto-classified. The pipeline does not try to label "FBI raid" as `severity=high` or sort decisions into a taxonomy. It stores what humans wrote, with provenance, and surfaces it. The hours/dates/quorum numbers are the easy part; the *judgment* about whether a meeting was compliant, about what counts as a controversy, about which decisions reshape voting rights — that's the work, and it stays in human hands. The compliance enum has a `Unreviewed` default exactly so the warehouse doesn't lie about coverage. **The lesson: if a column requires judgment, do not let the pipeline supply it.**
 - *L09 — Who can pull this data, and what's distribution ethics here?* Coming with the public API surface.
 
 ### Operations
@@ -32,9 +32,9 @@ The lessons are deliberately *political* as well as technical. The whole premise
 
 ### Testing
 
-- *L13 — Property tests over fixture tests where the universe is bigger than your examples.*
-- *L14 — Contract tests: protecting downstream from upstream.*
-- *L15 — Golden-file tests for transforms that aren't worth re-deriving in test code.*
+- *L13 — Property tests over fixture tests where the universe is bigger than your examples.* Coming with the voter-file address parser.
+- **L14 — Contract tests: protecting downstream from upstream.** `test_missing_required_element_raises` and `test_malformed_feed_raises_loudly` (in `test_youtube_rss.py`) lock in the assumption that the YouTube Atom feed contains `<yt:videoId>` on every entry. If YouTube ever drops that field, those tests fail in CI before the ingest does in production. The fixture itself is a captured payload — the contract is "this is what we believed the upstream was" and the test is "if that belief breaks, the build fails." **The lesson: pin the upstream's behavior with a test, not a comment.**
+- **L15 — Golden-file tests for transforms that aren't worth re-deriving in test code.** `test_workbook_seed.py` runs against `fixtures/seb_meetings_v0.xlsx` rather than a hand-built Python dict. The workbook *is* the input the pipeline ingests in production — reproducing it in code would be slower, more fragile, and would test only what we remembered to write. Tests assert concrete row counts (`17 meetings, 8 controversies, 15 sources`) so any silent drift surfaces. **The lesson: when the production input is a file, make the file your fixture; let the file's shape be the test.**
 
 ## How to read this file
 
