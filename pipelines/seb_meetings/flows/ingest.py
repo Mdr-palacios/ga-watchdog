@@ -27,6 +27,7 @@ import structlog
 from prefect import flow, get_run_logger, task
 
 from pipelines.seb_meetings.sources import workbook_seed, youtube_rss
+from warehouse import corrections as corrections_module
 from warehouse import loader as warehouse
 
 log = structlog.get_logger(__name__)
@@ -75,6 +76,11 @@ def _backfill_video_urls_task(db_path: Path | None) -> int:
         ).fetchone()[0]
 
 
+@task(name="apply-corrections")
+def _apply_corrections_task(db_path: Path | None) -> dict[str, int]:
+    return corrections_module.run(db_path=db_path)
+
+
 @flow(name="seb-meetings-ingest", log_prints=True)
 def ingest_seb_meetings(
     db_path: Path | None = None,
@@ -112,11 +118,16 @@ def ingest_seb_meetings(
         prefect_log.info("Back-filling missing video URLs")
         meetings_with_video = _backfill_video_urls_task(db_path)
 
+    prefect_log.info("Applying corrections")
+    correction_counts = _apply_corrections_task(db_path)
+    prefect_log.info("Correction counts: %s", correction_counts)
+
     summary: dict[str, int | dict[str, int]] = {
         "schema_files_applied": len(schema_files),
         "seed": seed_counts,
         "videos_upserted": video_count,
         "meetings_with_video_url": meetings_with_video,
+        "corrections": correction_counts,
     }
     prefect_log.info("Ingest summary: %s", summary)
     return summary

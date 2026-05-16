@@ -1,0 +1,39 @@
+# SEB meetings corrections
+#
+# Every entry here is a deliberate, human-authored override of a value
+# the workbook or RSS source supplied. Adding an entry is the only
+# sanctioned way to change `seb.meetings`. See:
+#
+#   docs/runbooks/corrections.md   — how to add a correction
+#   docs/teaching/LESSONS.md §L09  — the political stakes
+#
+# Format reference:
+#
+#   - id:             kebab-case, globally unique, never reused
+#     meeting_id:     integer matching seb.meetings.meeting_id
+#     column:         one of: video_url, source_url, meeting_format, chair,
+#                     members_present, quorum_met, agenda_summary,
+#                     key_decisions, compliance_status, compliance_notes,
+#                     controversies, hours_logged
+#     new_value:      the corrected value (string/number/null)
+#     reason:         single line; why this correction exists
+#     evidence_url:   URL backing the claim (optional but encouraged)
+#     corrected_by:   GitHub handle of the author
+#     corrected_at:   optional ISO timestamp (defaults to apply time)
+
+corrections:
+  - id: meeting-1-may-14-video-url-2026-05-16
+    meeting_id: 1
+    column: video_url
+    new_value: https://www.youtube.com/watch?v=uGWdZ-DmGDA
+    reason: >-
+      v0 workbook linked meeting #1 (May 14, 2026 Special Called) to video
+      h_0CXACXv9A, which is actually the April 22, 2026 Special Called
+      meeting (meeting #2). Verified by cross-referencing the SEB
+      channel's RSS feed: uGWdZ-DmGDA was published 2026-05-14 21:00 UTC
+      with the title 'State Election Board "Special Called Meeting" -
+      May 14, 2026'. The SOS agenda PDF also points at
+      youtube.com/live/uGWdZ-DmGDA.
+    evidence_url: https://sos.ga.gov/sites/default/files/2026-05/agenda_-_seb_special_called_meeting_-_may_14_2026.pdf
+    corrected_by: Mdr-palacios
+    corrected_at: 2026-05-16T23:30:00+00:00
