@@ -1,0 +1,22 @@
+# Code owners for ga-watchdog
+# Every PR auto-requests review from the listed owners.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner — everything in the repo
+*                              @Mdr-palacios
+
+# Architecture decisions and teaching docs require explicit owner sign-off
+/docs/adr/                     @Mdr-palacios
+/docs/teaching/                @Mdr-palacios
+
+# Warehouse schema changes are contracts — extra eyes on every change
+/warehouse/schema/             @Mdr-palacios
+
+# Pipeline boundaries — owner reviews any change crossing them
+/pipelines/seb_meetings/       @Mdr-palacios
+/pipelines/voter_file/         @Mdr-palacios
+
+# CI / repo config / dependency surface
+/.github/                      @Mdr-palacios
+/pyproject.toml                @Mdr-palacios
+/.pre-commit-config.yaml       @Mdr-palacios

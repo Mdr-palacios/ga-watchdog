@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Type checkers
+.mypy_cache/
+.dmypy.json
+.pyre/
+.ruff_cache/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Environment
+.env
+.env.local
+.envrc
+secrets/
+
+# Pipeline runtime artifacts
+.dlt/
+dlt.log*
+data/raw/
+data/staging/
+data/warehouse/*.duckdb
+data/warehouse/*.duckdb.wal
+!data/warehouse/.gitkeep
+.prefect/
+
+# Generated outputs (regenerable; not source of truth)
+outputs/digests/*.md
+!outputs/digests/.gitkeep
+outputs/workbook_sync/*.xlsx
+!outputs/workbook_sync/.gitkeep
+
+# Local notebooks
+notebooks/local/
