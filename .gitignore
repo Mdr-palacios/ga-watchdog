@@ -72,3 +72,4 @@ outputs/workbook_sync/*.xlsx
 
 # Local notebooks
 notebooks/local/
+.venv-lint/
