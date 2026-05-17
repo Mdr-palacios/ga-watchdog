@@ -24,7 +24,7 @@ This repo is a working tool **and** the worked example. Every meaningful design 
 
 - **Phase 1 — SEB Meetings ingestion: shipped.** Workbook seed + live YouTube RSS, idempotent DuckDB warehouse, 31 tests. See [PR #1](https://github.com/Mdr-palacios/ga-watchdog/pull/1).
 - **Phase 1.5 — Corrections workflow: shipped.** YAML-authored, PR-reviewed, audit-logged overrides on top of seed data. See [PR #2](https://github.com/Mdr-palacios/ga-watchdog/pull/2) and [LESSONS §L09](docs/teaching/LESSONS.md).
-- **Phase 2 — Voter file pipeline: scaffold in progress.** ADR-0004 (statute + ethics), schema, Pydantic model with statutory invariants encoded as tests. No real voter data lives in this repo. See [`pipelines/voter_file/README.md`](pipelines/voter_file/README.md).
+- **Phase 2 — Voter file pipeline: scaffold + bulk-file reader.** ADR-0004 (statute + ethics), schema, Pydantic model with statutory invariants encoded as tests, plus a [bulk-file reader](pipelines/voter_file/sources/bulk_file.py) that refuses files containing statutorily-confidential columns at header time and a [property-tested address composer](pipelines/voter_file/transforms/address.py). No real voter data lives in this repo — fixture is 50 synthetic rows. See [`pipelines/voter_file/README.md`](pipelines/voter_file/README.md) and [LESSONS §L13](docs/teaching/LESSONS.md).
 - Full roadmap: [`docs/teaching/roadmap.md`](docs/teaching/roadmap.md).
 
 ## Quickstart

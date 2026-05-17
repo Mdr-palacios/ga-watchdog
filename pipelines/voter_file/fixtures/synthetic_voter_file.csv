@@ -1,0 +1,51 @@
+County_code,Registration_Number,Voter_status,Last_name,First_name,Middle_maiden_name,Name_suffix,Residence_house_number,Residence_street_name,Residence_street_suffix,Residence_apt_unit_nbr,Residence_city,Residence_zipcode,Year_of_Birth,Registration_date,Race,Gender,County_precinct_id,Date_last_voted,Land_district,Congressional_district
+11,9000000,I,DoNotShip,Mockup,,,1679,Synthetic,Way,,Macon,30539,2001,19990115,HP,M,BIB-089,,12,9
+106,9000001,I,TestRecord,Stand-In,,,7030,Mockup,Ln,,Columbus,30319,1957,20170720,WH,U,MUS-120,20230227,4,1
+25,9000002,I,Placeholder,Sample,Q.,Sr,2211,Mockup,Ln,,Savannah,30449,2001,20090415,WH,F,CHA-004,20221012,9,5
+29,9000003,I,Output,Testing,Q.,Jr,8176,Synthetic,Way,,Athens,30588,1981,20211102,BH,U,CLA-141,20200713,7,2
+121,9000004,A,NotReal,Fixture,,,7175,Specimen,Ct,,Augusta,30563,1976,19980308,BH,M,RIC-097,20180727,5,1
+44,9000005,I,Synthetic,Sample,Q.,,1770,Mockup,Ln,,Decatur,30312,1978,20060711,OT,U,DEK-174,20180726,26,12
+60,9000006,A,Fixture,Fixture,Q.,,2168,Mockup,Ln,,Atlanta,30949,2001,20160805,OT,M,FUL-085,20190611,28,10
+11,9000007,I,Output,Dummy,Q.,,6097,Mockup,Ln,,Macon,30475,1982,19961211,U,U,BIB-116,,22,9
+44,9000008,A,Fixture,Specimen,Q.,,8361,Imaginary,St,Apt 7,Decatur,30814,1948,19931219,BH,U,DEK-048,20180218,24,9
+44,9000009,A,TestRecord,Specimen,Q.,,6243,Example,Blvd,,Decatur,30712,1975,19920325,WH,M,DEK-196,,26,10
+106,9000010,I,TestRecord,Example,Q.,,2007,Mockup,Ln,Apt 41,Columbus,30812,1989,20020308,AP,M,MUS-086,20190513,2,10
+106,9000011,A,Output,Dummy,Q.,,1463,Example,Blvd,,Columbus,30118,1944,19980207,HP,F,MUS-187,20210501,18,1
+29,9000012,A,FakeRow,Dummy,Q.,Jr,4817,Placeholder,Rd,,Athens,30766,1978,20221208,U,M,CLA-167,20230425,29,3
+106,9000013,A,Output,Synthetic,Q.,,9793,Testing,Dr,,Columbus,30777,2003,20090727,OT,F,MUS-131,20231124,26,2
+106,9000014,I,Placeholder,Specimen,Q.,Sr,1847,Testing,Dr,,Columbus,30937,1970,20241125,HP,U,MUS-015,20240524,21,7
+106,9000015,A,FakeRow,Synthetic,Q.,,4273,Testing,Dr,,Columbus,30941,1991,20041021,U,U,MUS-057,,24,3
+44,9000016,A,Placeholder,Placeholder,,,6961,Mockup,Ln,,Decatur,30164,1977,19980906,U,F,DEK-068,20190511,17,13
+29,9000017,A,DoNotShip,Specimen,Q.,,6256,Example,Blvd,Apt 34,Athens,30846,1961,20250323,OT,M,CLA-032,20200310,3,3
+60,9000018,A,Example,Placeholder,,,2450,Synthetic,Way,,Atlanta,30657,1977,20131122,OT,M,FUL-048,,25,1
+60,9000019,A,Output,Mockup,,,4428,Placeholder,Rd,Apt 40,Atlanta,30879,2002,19910604,OT,U,FUL-127,20230125,3,13
+60,9000020,A,Synthetic,Stand-In,Q.,,8518,Example,Blvd,,Atlanta,30450,1941,20230212,BH,M,FUL-068,20200417,22,12
+25,9000021,A,DoNotShip,Example,Q.,,6341,Mockup,Ln,,Savannah,30839,1970,20140606,U,F,CHA-069,20180608,24,14
+106,9000022,A,Output,Specimen,Q.,,2589,Mockup,Ln,Apt 21,Columbus,30689,1978,20200521,U,F,MUS-002,20190704,18,1
+121,9000023,A,Fixture,Placeholder,Q.,,7890,Example,Blvd,Apt 47,Augusta,30635,1944,20150710,AI,M,RIC-197,,14,13
+44,9000024,A,DoNotShip,Specimen,,,3207,Mockup,Ln,,Decatur,30700,1995,20141027,OT,U,DEK-073,,12,14
+25,9000025,A,FakeRow,Fixture,,Jr,7137,Testing,Dr,Apt 2,Savannah,30669,1954,19990222,AP,M,CHA-047,20221117,17,1
+11,9000026,A,Example,Mockup,,,4944,Specimen,Ct,Apt 30,Macon,30186,1940,20140713,BH,M,BIB-003,20230719,26,7
+25,9000027,A,Output,Stand-In,,,4173,Imaginary,St,,Savannah,30452,1975,20240506,BH,U,CHA-023,20180213,28,5
+60,9000028,I,Fixture,Example,Q.,,9301,Imaginary,St,,Atlanta,30391,1957,20140203,U,F,FUL-093,20230604,24,9
+29,9000029,A,TestRecord,Fixture,Q.,,3839,Specimen,Ct,Apt 3,Athens,30948,1990,20040719,U,U,CLA-027,,24,11
+29,9000030,I,NotReal,Synthetic,Q.,Jr,6533,Testing,Dr,,Athens,30193,1984,20181225,AI,U,CLA-011,,22,7
+44,9000031,A,Example,Synthetic,,,5655,Example,Blvd,,Decatur,30262,1970,20071206,OT,U,DEK-088,20210912,16,8
+11,9000032,A,FakeRow,Testing,,,4716,Example,Blvd,,Macon,30371,1955,20220925,U,F,BIB-063,20210717,26,6
+44,9000033,A,Synthetic,Stand-In,Q.,,9478,Fictional,Ave,,Decatur,30630,1986,20051014,BH,M,DEK-009,20241220,6,12
+11,9000034,A,Example,Stand-In,Q.,,883,Example,Blvd,,Macon,30470,1965,20050316,AI,F,BIB-151,,6,10
+44,9000035,A,Synthetic,Specimen,,,3311,Specimen,Ct,,Decatur,30549,1987,20141209,OT,U,DEK-166,20230522,4,2
+25,9000036,I,FakeRow,Dummy,Q.,,4929,Fictional,Ave,,Savannah,30935,1981,20161003,WH,M,CHA-058,20210714,12,4
+29,9000037,A,Example,Specimen,,,5797,Testing,Dr,,Athens,30506,1953,20151021,U,U,CLA-056,,16,2
+25,9000038,A,Generator,Sample,Q.,,8101,Example,Blvd,,Savannah,30278,1988,20110826,BH,F,CHA-186,20251016,8,7
+60,9000039,A,FakeRow,Synthetic,Q.,,2727,Example,Blvd,,Atlanta,30900,1960,20080822,OT,U,FUL-165,20210825,26,4
+11,9000040,I,DoNotShip,Example,Q.,,8246,Mockup,Ln,,Macon,30965,1957,20250523,HP,U,BIB-183,20200607,9,5
+106,9000041,A,Placeholder,Example,Q.,,5628,Synthetic,Way,,Columbus,30536,1985,19910812,WH,U,MUS-077,20210704,24,3
+121,9000042,A,Fixture,Mockup,,,4199,Specimen,Ct,,Augusta,30171,1954,20100120,HP,F,RIC-086,20250616,5,12
+25,9000043,I,Example,Placeholder,,,339,Fictional,Ave,,Savannah,30149,1955,19930308,HP,F,CHA-072,,26,13
+44,9000044,I,Generator,Sample,Q.,II,1647,Testing,Dr,,Decatur,30334,1978,20130727,AI,F,DEK-145,20180611,2,11
+106,9000045,I,DoNotShip,Specimen,,,6389,Placeholder,Rd,,Columbus,30745,1975,19940919,AP,F,MUS-029,20200608,12,11
+121,9000046,I,DoNotShip,Dummy,Q.,,5828,Fictional,Ave,,Augusta,30981,1969,20141003,OT,U,RIC-147,20250219,8,7
+29,9000047,I,Generator,Placeholder,Q.,,2175,Mockup,Ln,Apt 48,Athens,30961,1997,20050711,HP,M,CLA-161,20180911,2,12
+29,9000048,A,FakeRow,Dummy,,,3899,Imaginary,St,,Athens,30171,1996,20220613,WH,M,CLA-020,,2,9
+29,9000049,A,FakeRow,Stand-In,Q.,,6492,Imaginary,St,Apt 6,Athens,30491,1954,20220109,AI,F,CLA-105,20231201,30,9
