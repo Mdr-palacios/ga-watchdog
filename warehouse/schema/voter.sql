@@ -94,3 +94,23 @@ SELECT
 FROM voter.suppressions
 GROUP BY voter_id
 HAVING LAST(action ORDER BY requested_at) = 'suppress';
+
+-- Public-safe surface: every voter NOT currently suppressed.
+--
+-- THIS is the view any public output, public endpoint, or
+-- cross-pipeline join must read from. Reading `voter.voters` directly
+-- in a public context is a bug — it bypasses the filter the voter
+-- explicitly requested. Phase 2.4's public read API will be wired
+-- against this view, not the underlying table.
+--
+-- The underlying record stays intact in `voter.voters`: we owe the
+-- voter a filter, not a rewrite of their record. The suppressions
+-- audit log is the contract.
+CREATE OR REPLACE VIEW voter.public_voters AS
+SELECT v.*
+FROM voter.voters v
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM voter.active_suppressions s
+    WHERE s.voter_id = v.voter_id
+);

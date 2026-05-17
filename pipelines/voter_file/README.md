@@ -18,15 +18,23 @@ pipelines/voter_file/
 │   ├── models.py       ← Pydantic Voter model. Confidential fields by statute
 │   │                     do not exist here, on purpose.
 │   └── address.py      ← Composes/splits residence display lines. Property-tested.
-├── flows/              ← Prefect entrypoints (forthcoming: 2.2 suppressions)
+├── flows/
+│   └── apply_suppressions.py   ← Prefect flow: read suppressions/*.yaml,
+│                                  log into voter.suppressions (audit-only;
+│                                  never UPDATEs voter.voters).
 ├── tests/
-│   ├── test_models.py      ← Statute-as-test: confidential fields raise.
-│   ├── test_bulk_file.py   ← Reader contract + fixture round-trip.
-│   └── test_address.py     ← Hypothesis property tests (see LESSONS §L13).
+│   ├── test_models.py              ← Statute-as-test: confidential fields raise.
+│   ├── test_bulk_file.py           ← SOS reader contract + fixture round-trip.
+│   ├── test_targetsmart_format.py  ← TargetSmart reader contract; parametrized
+│   │                                  refusal over both refusal lists.
+│   ├── test_suppressions.py        ← YAML → audit log → public_voters view.
+│   └── test_address.py             ← Hypothesis property tests (see LESSONS §L13).
 └── fixtures/
-    ├── synthetic_voter_file.csv     ← 50 obviously-synthetic rows, SOS-shaped.
-    ├── build_synthetic_fixture.py   ← Deterministic generator for the CSV above.
-    └── README.md                    ← Why no real voter data lives here.
+    ├── synthetic_voter_file.csv                ← 50 synthetic rows, SOS-shaped.
+    ├── build_synthetic_fixture.py              ← Generator for the above.
+    ├── synthetic_targetsmart_voter_file.csv    ← 50 synthetic rows, TargetSmart-shaped.
+    ├── build_synthetic_targetsmart_fixture.py  ← Generator for the above.
+    └── README.md                               ← Why no real voter data lives here.
 ```
 
 The warehouse schema for this pipeline lives at [`warehouse/schema/voter.sql`](../../warehouse/schema/voter.sql).
@@ -46,7 +54,7 @@ The suppressions surface (any voter or representative can request their record b
 | --- | --- | --- |
 | 2.0 — Scaffold | ADR-0004, `Voter` model, `voter.sql`, suppressions skeleton, fixture-only tests | shipped (PR #3) |
 | 2.1 — Bulk file reader (SOS) | SOS-format CSV reader with statutory-column refusal, property-tested address composer, synthetic fixture | shipped (PR #4) |
-| **2.1b — TargetSmart-shape reader** | Alt-format reader for partner-shared TargetSmart files; public-only subset; licensed-column refusal at header time; synthetic shape-fixture | shipped (this PR) |
-| 2.2 — Suppressions workflow | Apply-suppressions task in the flow, mirroring the corrections workflow | next |
+| 2.1b — TargetSmart-shape reader | Alt-format reader for partner-shared TargetSmart files; public-only subset; licensed-column refusal at header time; synthetic shape-fixture | shipped (PR #5) |
+| **2.2 — Suppressions workflow** | YAML-authored, audit-logged "filter this voter from public outputs" requests; mirrors the SEB corrections workflow; adds `voter.public_voters` view as the canonical safe surface | shipped (this PR) |
 | 2.3 — Cross-pipeline analytics | SQL joining `seb.meetings` (SEB decisions) to `voter.aggregates` (turnout/registration trends) | |
 | 2.4 — Public read API | The output surface from ADR-0001, with ADR-0005 (forthcoming) on the commercial-use prohibition | |
