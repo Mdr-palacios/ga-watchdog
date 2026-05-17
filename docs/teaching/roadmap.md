@@ -43,6 +43,8 @@ This roadmap is honest about what exists, what's next, and what's hypothetical. 
 - [ ] `warehouse/schema/voter_file.sql` — registration history, change events
 - [ ] Anomaly detection SQL: unusual purge activity, unusual registration spikes
 - [x] `outputs/api/` — read-only FastAPI surface (Phase 2.4), shipped with ADR-0005, allow-list module, denial list, view-chain enforcement, rate limit, hashed-IP logging, bulk-export script, and Vercel deploy config. See [L09e](LESSONS.md) for the privacy posture.
+- [x] `docs/runbooks/` — operational runbooks for the conditions Phase 2.4 makes alertable: `api-stale-data.md`, `rate-limit-firing.md`, `warehouse-rebuild-failure.md`. See [L10](LESSONS.md).
+- [x] `docs/observability.md` — structured-logging conventions, severity rules, what we never log, trends-via-warehouse, no-alert-without-runbook. Names current drift honestly. See [L11](LESSONS.md).
 
 ## Phase 3 — Cross-pipeline analytics
 
