@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question about the repo or curriculum
+    url: https://github.com/Mdr-palacios/ga-watchdog/discussions
+    about: For open-ended questions that aren't a drift or a gap. (When Discussions is enabled.)
