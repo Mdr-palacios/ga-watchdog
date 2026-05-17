@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5B3A89" />
+  <title>GA Watchdog: tracking Georgia's election board, county by county</title>
+  <meta name="description" content="What the Georgia State Election Board decided, and what changed on the ground for voters. Updated quarterly." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="banner">
+    <div class="container banner__inner">
+      <span class="chip chip--accent">Preview</span>
+      <span>You're looking at an early version of this site. The numbers below are placeholders while we finish wiring up the live data; the underlying tools (county lookup, downloads, privacy posture) are now in place. Real updates start posting every few months beginning this summer.</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 22 L18 28 L28 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand__name">
+          GA Watchdog
+          <small>Watching the watchers</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#overview" class="is-active">Overview</a>
+        <a href="#meetings">Recent meetings</a>
+        <a href="#whats-new">What's new</a>
+        <a href="#counties">Your county</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <section class="section hero">
+      <div class="container">
+        <span class="eyebrow">Georgia, 2024</span>
+        <h1 class="hero__title">State Election Board decisions, impact by county.</h1>
+        <p class="hero__lede">
+          A small board in Atlanta decides how every county in Georgia counts mail ballots, how drop boxes work, and when an election gets certified. We sit through their meetings so you don't have to, and we show you how their choices land in the place you actually live.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#counties">Find your county</a>
+          <a class="btn btn--ghost" href="#meetings">See recent meetings</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Headline stats -->
+    <section class="section section--tight" id="overview">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">At a glance</span>
+          <h2 class="section-head__title">Here's what 2024 looked like.</h2>
+        </div>
+        <div class="grid grid--4">
+          <div class="stat-card">
+            <span class="stat-card__label">Board meetings held</span>
+            <span class="stat-card__value">14</span>
+            <span class="stat-card__hint">10 regular, 4 emergency</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__label">Meetings flagged</span>
+            <span class="stat-card__value">5</span>
+            <span class="stat-card__hint">For procedural or transparency concerns</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__label">Counties covered</span>
+            <span class="stat-card__value">159</span>
+            <span class="stat-card__hint">All of Georgia</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__label">Registered voters</span>
+            <span class="stat-card__value">8.2M</span>
+            <span class="stat-card__hint">Active, as of Q4 2024</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's been happening -->
+    <section class="section" id="meetings">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Recent meetings</span>
+          <h2 class="section-head__title">What the board has been working on.</h2>
+          <p>These short recaps are written by the team at Common Cause Georgia, who sit in on every meeting.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <article class="card">
+            <div class="card__eyebrow">
+              <span class="chip chip--primary">Regular meeting</span>
+              <span class="chip chip--neutral">January 9, 2024</span>
+            </div>
+            <h3 class="card__title">Voting machines and drop-box hours.</h3>
+            <p>The board signed off on the voting machines for the March primary. Three changes to drop-box hours also came up, and one member said out loud that the public hadn't been given enough time to weigh in.</p>
+            <div class="card__meta">
+              <span>State Capitol, in person</span>
+              <span>·</span>
+              <span>Quorum met</span>
+              <span>·</span>
+              <span style="color: var(--color-danger); font-weight: 600;">Concerns noted</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">
+              <span class="chip chip--accent">Emergency meeting</span>
+              <span class="chip chip--neutral">February 12, 2024</span>
+            </div>
+            <h3 class="card__title">Absentee ballot complaints from three counties.</h3>
+            <p>The board called this meeting on less than a day's notice. They reviewed complaints from three counties about how absentee ballots were being handled. The short notice became part of the conversation itself.</p>
+            <div class="card__meta">
+              <span>Virtual</span>
+              <span>·</span>
+              <span>Quorum met</span>
+              <span>·</span>
+              <span style="color: var(--color-danger); font-weight: 600;">Flagged</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">
+              <span class="chip chip--primary">Regular meeting</span>
+              <span class="chip chip--neutral">March 20, 2024</span>
+            </div>
+            <h3 class="card__title">Signing off on city election results.</h3>
+            <p>The board certified the results of city elections in four counties. Nothing controversial came up, and no one raised a concern. A quiet meeting.</p>
+            <div class="card__meta">
+              <span>State Capitol, in person</span>
+              <span>·</span>
+              <span>Quorum met</span>
+              <span>·</span>
+              <span style="color: #437A22; font-weight: 600;">Clean</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">
+              <span class="chip chip--accent">Emergency meeting</span>
+              <span class="chip chip--neutral">April 22, 2024</span>
+            </div>
+            <h3 class="card__title">Reviewing an audit across several counties.</h3>
+            <p>The board read the findings of an audit that covered a handful of counties. One member said the timing felt off, since the May primary was only weeks away and the public didn't have real room to respond.</p>
+            <div class="card__meta">
+              <span>Hybrid (in person and virtual)</span>
+              <span>·</span>
+              <span>Quorum met</span>
+              <span>·</span>
+              <span style="color: var(--color-danger); font-weight: 600;">Flagged</span>
+            </div>
+          </article>
+        </div>
+
+        <div style="margin-top: var(--space-7); text-align: center;">
+          <a class="btn btn--ghost" href="#">See all 14 meetings from 2024</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's new -->
+    <section class="section section--tight" id="whats-new">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">What's new this season</span>
+          <h2 class="section-head__title">Three things you can do here now.</h2>
+          <p>The site finished a quiet round of work this spring. Here's what changed for you, in plain language.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card">
+            <div class="card__eyebrow"><span class="chip chip--primary">New</span></div>
+            <h3 class="card__title">Look up your county on its own page.</h3>
+            <p>Type your county into the box below; you'll see the board decisions that touched it, alongside how its voter rolls have moved. No login, no signup, no tracking.</p>
+          </div>
+          <div class="card">
+            <div class="card__eyebrow"><span class="chip chip--primary">New</span></div>
+            <h3 class="card__title">Download the whole dataset.</h3>
+            <p>Reporters, researchers, and organizers can grab the full county-level numbers as a spreadsheet. We publish the same file we use ourselves, so what we see is what you see.</p>
+          </div>
+          <div class="card">
+            <div class="card__eyebrow"><span class="chip chip--primary">New</span></div>
+            <h3 class="card__title">A written commitment on privacy.</h3>
+            <p>We wrote down, in public, what we will never publish: anything that points to a specific voter. Two separate layers of the system enforce it, so a single mistake can't quietly leak.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Your county -->
+    <section class="section" id="counties">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Find your county</span>
+          <h2 class="section-head__title">Look up your county.</h2>
+          <p>The board's rules apply across all of Georgia, but they don't feel the same in every county. A change to drop-box hours hits a county with 600,000 voters differently than one with 12,000. Start by finding where you live.</p>
+        </div>
+
+        <div class="resources-toolbar" role="region" aria-label="County filter">
+          <div class="field" style="flex: 1 1 280px;">
+            <label class="field__label" for="county-search">Search counties</label>
+            <input id="county-search" class="input" type="search" placeholder="e.g. Fulton, DeKalb, Cobb" />
+          </div>
+          <div class="field" style="flex: 0 1 200px;">
+            <label class="field__label" for="county-region">Region</label>
+            <select id="county-region" class="select">
+              <option>All regions</option>
+              <option>Metro Atlanta</option>
+              <option>North Georgia</option>
+              <option>Middle Georgia</option>
+              <option>Coastal</option>
+              <option>South Georgia</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="data-table-wrap">
+          <div class="data-table-head">
+            <h3>The ten counties with the most active voters.</h3>
+            <span class="chip chip--neutral">End of 2024, placeholder numbers</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>County</th>
+                <th>Region</th>
+                <th class="num">Active voters</th>
+                <th class="num">ZIP codes covered</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Fulton</td><td>Metro Atlanta</td><td class="num">633,290</td><td class="num">42</td></tr>
+              <tr><td>Gwinnett</td><td>Metro Atlanta</td><td class="num">593,407</td><td class="num">38</td></tr>
+              <tr><td>Cobb</td><td>Metro Atlanta</td><td class="num">521,884</td><td class="num">35</td></tr>
+              <tr><td>DeKalb</td><td>Metro Atlanta</td><td class="num">501,773</td><td class="num">33</td></tr>
+              <tr><td>Cherokee</td><td>North Georgia</td><td class="num">202,440</td><td class="num">18</td></tr>
+              <tr><td>Chatham</td><td>Coastal</td><td class="num">192,408</td><td class="num">21</td></tr>
+              <tr><td>Clayton</td><td>Metro Atlanta</td><td class="num">187,653</td><td class="num">19</td></tr>
+              <tr><td>Forsyth</td><td>North Georgia</td><td class="num">175,331</td><td class="num">15</td></tr>
+              <tr><td>Henry</td><td>Metro Atlanta</td><td class="num">168,224</td><td class="num">17</td></tr>
+              <tr><td>Hall</td><td>North Georgia</td><td class="num">142,019</td><td class="num">22</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2024 timeline summary -->
+    <section class="section" id="timeline">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">The year in four pieces</span>
+          <h2 class="section-head__title">2024, season by season.</h2>
+          <p>Most of the year had at least one meeting worth flagging. And while all that was happening, Georgia's voter rolls quietly grew by about one percent.</p>
+        </div>
+
+        <div class="data-table-wrap">
+          <div class="data-table-head">
+            <h3>A quarter-by-quarter look.</h3>
+            <span class="chip chip--neutral">Placeholder numbers</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Quarter</th>
+                <th class="num">Meetings</th>
+                <th class="num">Flagged</th>
+                <th class="num">Statewide active voters</th>
+                <th>What came up most</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024, Q1</td>
+                <td class="num">3</td>
+                <td class="num">2</td>
+                <td class="num">8,112,418</td>
+                <td>Drop-box hours and voting machines</td>
+              </tr>
+              <tr>
+                <td>2024, Q2</td>
+                <td class="num">4</td>
+                <td class="num">2</td>
+                <td class="num">8,154,007</td>
+                <td>Absentee ballots and audit timing</td>
+              </tr>
+              <tr>
+                <td>2024, Q3</td>
+                <td class="num">4</td>
+                <td class="num">1</td>
+                <td class="num">8,187,553</td>
+                <td>Last-minute rule changes</td>
+              </tr>
+              <tr>
+                <td>2024, Q4</td>
+                <td class="num">3</td>
+                <td class="num">0</td>
+                <td class="num">8,201,290</td>
+                <td>Certifying the November results</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">About this project</span>
+          <h2 class="section-head__title">A public record of how Georgia runs its elections on a county level, with the intersection of State Election Board decisions.</h2>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card">
+            <div class="card__eyebrow"><span class="chip chip--primary">What we publish</span></div>
+            <h3 class="card__title">Things that are already public.</h3>
+            <p>Board meetings are open by law. So are the counts of how many people are registered to vote. We just gather it all up in one place so you don't have to chase it down.</p>
+          </div>
+          <div class="card">
+            <div class="card__eyebrow"><span class="chip chip--primary">What we don't publish</span></div>
+            <h3 class="card__title">Anything that points to you.</h3>
+            <p>We never share information about individual voters. You'll only see totals, and only at the county level. If you've asked to be left out of public datasets, you're left out of ours too.</p>
+          </div>
+          <div class="card">
+            <div class="card__eyebrow"><span class="chip chip--primary">How to use this</span></div>
+            <h3 class="card__title">A starting point, not the last word.</h3>
+            <p>We tell you what happened. What it means is up to you. Reporters, organizers, and folks who just want to keep an eye on things are all welcome here.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <h4>Who's behind it</h4>
+          <p>GA Watchdog comes from <a href="https://palacios.community" target="_blank" rel="noopener">Palacios Contigo</a>, an Atlanta civil rights and election protection group. Everything you see comes from official sources: filings from the Secretary of State, the board's own public agendas and minutes, and the statewide voter file. Spot something wrong, want your county added, or just have a question? Write to <a href="mailto:rosario@palacios.community">rosario@palacios.community</a>.</p>
+        </div>
+
+        <div class="callout" style="margin-top: var(--space-5);">
+          <h4>When something breaks, we say so</h4>
+          <p>Numbers move; sources change; mistakes happen. When they do, we publish a short note explaining what was wrong, what's correct, and how we know. The original (incorrect) value stays in our records so the change itself is something you can audit. We'd rather be honest about a correction than quietly rewrite history.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="#" style="margin-bottom: var(--space-4);">
+          <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 22 L18 28 L28 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="brand__name">GA Watchdog<small>Watching the watchers</small></span>
+        </a>
+        <p class="text-muted" style="max-width: 38ch; font-size: var(--text-sm); margin-top: var(--space-3);">
+          Keeping an eye on Georgia elections, in language anyone can read.
+        </p>
+      </div>
+      <div>
+        <h4>The work</h4>
+        <ul>
+          <li><a href="#meetings">Recent meetings</a></li>
+          <li><a href="#whats-new">What's new</a></li>
+          <li><a href="#counties">Find your county</a></li>
+          <li><a href="#timeline">2024 by quarter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://sos.ga.gov/index.php/elections/state_election_board" target="_blank" rel="noopener">State Election Board</a></li>
+          <li><a href="https://sos.ga.gov" target="_blank" rel="noopener">Georgia Secretary of State</a></li>
+          <li><a href="https://www.house.ga.gov/Representatives/en-US/HouseMembersList.aspx" target="_blank" rel="noopener">General Assembly</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:rosario@palacios.community">rosario@palacios.community</a></li>
+          <li><a href="https://palacios.community" target="_blank" rel="noopener">Palacios Contigo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="site-footer__base">
+        <span>© 2026 Palacios Contigo, LLC. A public-interest project.</span>
+        <span>Atlanta, Georgia.</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
