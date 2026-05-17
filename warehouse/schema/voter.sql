@@ -114,3 +114,62 @@ WHERE NOT EXISTS (
     FROM voter.active_suppressions s
     WHERE s.voter_id = v.voter_id
 );
+
+-- ------------------------------------------------------------------
+-- Aggregate views: the only surfaces a public output should read.
+--
+-- These are the views ADR-0004 Rule 4 says we publish (county-level,
+-- precinct-level, status-level rollups), as opposed to per-voter rows.
+-- Cross-pipeline analytic views in `warehouse/queries/` must compose
+-- THESE views, never `voter.voters` directly — that keeps suppressions
+-- cascading and keeps the join key away from per-voter granularity.
+--
+-- All aggregate views read from `voter.public_voters` (NOT
+-- `voter.voters`) so any voter who has filed a suppression drops out
+-- of every count automatically.
+-- ------------------------------------------------------------------
+
+-- County-level registration summary, broken out by status.
+-- Counts of GA counties are in the millions, so per-county counts do
+-- not raise re-identification concerns even at fine status splits.
+CREATE OR REPLACE VIEW voter.county_registration_summary AS
+SELECT
+    county,
+    status,
+    COUNT(*)                            AS voter_count,
+    COUNT(DISTINCT residence_zip5)      AS distinct_zip5_count,
+    MIN(birth_year)                     AS earliest_birth_year,
+    MAX(birth_year)                     AS latest_birth_year
+FROM voter.public_voters
+WHERE county IS NOT NULL
+GROUP BY county, status;
+
+-- Precinct-level registration summary, with minimum-cell-size
+-- suppression. The smallest GA precincts have well under 100
+-- registered voters; an unguarded per-precinct, per-status count would
+-- give a third party a small enough cohort to deanonymize against
+-- another dataset. ADR-0004 Rule 4 forbids that.
+--
+-- Cells with fewer than the threshold are kept in the view (so totals
+-- still balance) but voter_count is NULL and `suppressed_for_size` is
+-- TRUE. The threshold lives here and is referenced by the test suite;
+-- changing it requires changing both, which forces an explicit code
+-- review of the privacy posture.
+CREATE OR REPLACE VIEW voter.precinct_registration_summary AS
+WITH raw AS (
+    SELECT
+        county,
+        precinct,
+        status,
+        COUNT(*) AS raw_count
+    FROM voter.public_voters
+    WHERE precinct IS NOT NULL
+    GROUP BY county, precinct, status
+)
+SELECT
+    county,
+    precinct,
+    status,
+    CASE WHEN raw_count < 25 THEN NULL ELSE raw_count END AS voter_count,
+    raw_count < 25                                        AS suppressed_for_size
+FROM raw;
