@@ -11,7 +11,7 @@ output sink during Phase 1, even after live ingestion lands.
 Important: free-text qualitative columns (controversies, compliance
 notes, key decisions) are kept as strings on purpose. The pipeline does
 NOT attempt to auto-classify them in Phase 1 — that's a human-review
-step. See ADR-0004 (forthcoming) for why.
+step. See LESSONS.md L08 for the reasoning.
 """
 
 from __future__ import annotations

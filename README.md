@@ -10,7 +10,7 @@ Two pipelines, one shared warehouse.
 
 **Pipeline 1 — GA SEB Meetings Watcher.** Tracks every meeting of the Georgia State Election Board: dates, decisions, compliance with the Open Meetings Act, controversies, and source citations. Ingests SEB YouTube livestreams, the SOS website, court filings, and news coverage. Lands in a queryable warehouse. Outputs a structured workbook, a public meeting digest, and a documented dataset.
 
-**Pipeline 2 — GA Voter File Watcher.** Ingests publicly available GA voter registration data (county- and precinct-level aggregates), normalizes the format drift between releases, and surfaces signal: which counties had unusual purge activity, which precincts saw registration spikes, where the system is moving and how fast.
+**Pipeline 2 — GA Voter File Watcher.** Ingests the statutorily-public Georgia voter registration list (per [O.C.G.A. § 21-2-225](https://law.justia.com/codes/georgia/title-21/chapter-2/article-6/section-21-2-225/)), normalizes format drift between releases, and surfaces signal at county and precinct level: unusual purge activity, registration spikes, where the system is moving and how fast. Confidential fields named in the statute are not ingested, not stored, and not exposed. See [ADR-0004](docs/adr/0004-voter-file-sources-and-ethics.md) for the rules of engagement.
 
 **Cross-pipeline analytics.** The two pipelines share a warehouse on purpose. SEB decisions can be joined to voter file changes: what did the board decide, and what changed on the ground afterward?
 
@@ -22,7 +22,10 @@ This repo is a working tool **and** the worked example. Every meaningful design 
 
 ## Status
 
-Phase 0. Scaffolding only. See [`docs/teaching/roadmap.md`](docs/teaching/roadmap.md) for what's planned.
+- **Phase 1 — SEB Meetings ingestion: shipped.** Workbook seed + live YouTube RSS, idempotent DuckDB warehouse, 31 tests. See [PR #1](https://github.com/Mdr-palacios/ga-watchdog/pull/1).
+- **Phase 1.5 — Corrections workflow: shipped.** YAML-authored, PR-reviewed, audit-logged overrides on top of seed data. See [PR #2](https://github.com/Mdr-palacios/ga-watchdog/pull/2) and [LESSONS §L09](docs/teaching/LESSONS.md).
+- **Phase 2 — Voter file pipeline: scaffold in progress.** ADR-0004 (statute + ethics), schema, Pydantic model with statutory invariants encoded as tests. No real voter data lives in this repo. See [`pipelines/voter_file/README.md`](pipelines/voter_file/README.md).
+- Full roadmap: [`docs/teaching/roadmap.md`](docs/teaching/roadmap.md).
 
 ## Quickstart
 

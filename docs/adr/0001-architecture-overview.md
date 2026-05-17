@@ -60,3 +60,4 @@ Each pipeline owns its own `sources/`, `transforms/`, `flows/`, `tests/`, and `f
 
 - [ADR-0002 — DuckDB as the warehouse](0002-duckdb-warehouse.md)
 - [ADR-0003 — dlt for ingestion, Prefect for orchestration](0003-dlt-and-prefect.md)
+- [ADR-0004 — Voter file: data sources, redaction, and distribution ethics](0004-voter-file-sources-and-ethics.md)

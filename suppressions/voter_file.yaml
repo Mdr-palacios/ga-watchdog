@@ -1,0 +1,28 @@
+# Voter file suppressions
+#
+# A voter (or their representative) can request that their record be
+# filtered from any public output this repo produces. Each entry below
+# is a single, audit-logged request, reviewed via PR like a correction.
+#
+# Status: scaffold. This file ships empty on purpose — no real
+# suppressions belong here until the voter-file pipeline goes live and
+# the public output surface exists for someone to be filtered out of.
+#
+# See:
+#   docs/adr/0004-voter-file-sources-and-ethics.md  (Rule 5)
+#   docs/runbooks/suppressions.md                   (forthcoming)
+#
+# Format (when this file gains entries):
+#
+#   suppressions:
+#     - id: <kebab-case-stable-id>
+#       voter_id: <integer>
+#       action: suppress    # or 'unsuppress' to reverse a prior suppression
+#       reason: >-
+#         One-line reason. Does not need to disclose private details
+#         beyond what's necessary; "requested by voter under VA program"
+#         is enough for many cases.
+#       requested_by: <github-handle-of-the-pipeline-operator-recording-this>
+#       supersedes: <prior-suppression-id-if-this-is-an-unsuppress>
+
+suppressions: []
