@@ -48,6 +48,10 @@ dev = [
     "mypy>=1.10",
     "types-beautifulsoup4",
     "types-openpyxl",
+    # Public read API (ADR-0005). Pinned to the same floors as
+    # requirements-api.txt; the API ships from that file in prod.
+    "fastapi>=0.110",
+    "httpx>=0.27",
 ]
 transcription = [
     # Optional — adds video transcription. Heavy install; opt-in.
@@ -76,11 +80,17 @@ select = [
 ]
 ignore = ["E501"]  # line length enforced by formatter
 
+[tool.ruff.lint.per-file-ignores]
+# FastAPI's standard pattern is `def handler(x = Depends(...), y = Query(...))`.
+# Ruff's B008 flags those as function calls in defaults; the FastAPI runtime
+# requires it. Limit the ignore to the routes package.
+"outputs/api/routes/*.py" = ["B008"]
+
 [tool.ruff.format]
 quote-style = "double"
 
 [tool.pytest.ini_options]
-testpaths = ["pipelines"]
+testpaths = ["pipelines", "outputs"]
 python_files = ["test_*.py", "*_test.py"]
 addopts = "-ra --strict-markers --strict-config"
 markers = [

@@ -1,0 +1,8 @@
+# Runtime dependencies for the Vercel-deployed public read API.
+# Kept minimal: API doesn't need dlt, prefect, openpyxl, etc.
+# Versions pinned to the same floors as pyproject.toml.
+
+fastapi>=0.110
+duckdb>=1.0
+pydantic>=2.6
+structlog>=24.1

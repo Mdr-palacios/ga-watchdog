@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "builds": [
+    {
+      "src": "outputs/api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "includeFiles": "warehouse/warehouse.duckdb"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "outputs/api/index.py" }
+  ],
+  "env": {
+    "GA_WATCHDOG_WAREHOUSE_PATH": "warehouse/warehouse.duckdb"
+  }
+}

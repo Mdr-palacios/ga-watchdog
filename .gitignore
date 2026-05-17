@@ -69,6 +69,15 @@ outputs/digests/*.md
 !outputs/digests/.gitkeep
 outputs/workbook_sync/*.xlsx
 !outputs/workbook_sync/.gitkeep
+outputs/bulk/*.csv
+outputs/bulk/*.parquet
+outputs/bulk/MANIFEST.json
+!outputs/bulk/.gitkeep
+!outputs/bulk/README.md
+
+# Warehouse file (also bundled into Vercel deploys at build time)
+warehouse/*.duckdb
+warehouse/*.duckdb.wal
 
 # Local notebooks
 notebooks/local/
