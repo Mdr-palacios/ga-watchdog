@@ -9,6 +9,11 @@ A voter file is not that. Even a small slice of real voter records, even with co
 ## What goes here instead
 
 - **Synthetic fixtures only.** When tests need a record-shaped input, they construct one in Python (`Voter(voter_id=999, ...)`) with obviously fake data. The `Voter` model's `extra="forbid"` config makes the synthetic instance a real exercise of the schema; we lose nothing by not having a real file.
-- **Format fixtures, not content fixtures.** If we need to test "we correctly read column X from a `\t`-delimited file with these headers," we ship a 5-row file with synthetic names and addresses, demonstrating the format. Not real data.
+- **Format fixtures, not content fixtures.** If we need to test "we correctly read column X from a `\t`-delimited file with these headers," we ship a 50-row file with synthetic names and addresses, demonstrating the format. Not real data.
+
+## Files
+
+- `synthetic_voter_file.csv` — 50 synthetic rows matching the Georgia SOS bulk-file column names (subset). Every name is obviously fake; every `Registration_Number` is in the 9,000,000+ range, well clear of real SOS-issued identifiers. Used by `tests/test_bulk_file.py`.
+- `build_synthetic_fixture.py` — the deterministic generator that produced the CSV above. Checked in so anyone can audit (and regenerate) exactly how the synthetic data was constructed: `python3 pipelines/voter_file/fixtures/build_synthetic_fixture.py`.
 
 The full reasoning is in [ADR-0004](../../../docs/adr/0004-voter-file-sources-and-ethics.md).
