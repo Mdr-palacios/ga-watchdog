@@ -45,7 +45,8 @@ The suppressions surface (any voter or representative can request their record b
 | Step | What lands | Status |
 | --- | --- | --- |
 | 2.0 — Scaffold | ADR-0004, `Voter` model, `voter.sql`, suppressions skeleton, fixture-only tests | shipped (PR #3) |
-| **2.1 — Bulk file reader** | SOS-format CSV reader with statutory-column refusal, property-tested address composer, synthetic fixture | shipped (this PR) |
+| 2.1 — Bulk file reader (SOS) | SOS-format CSV reader with statutory-column refusal, property-tested address composer, synthetic fixture | shipped (PR #4) |
+| **2.1b — TargetSmart-shape reader** | Alt-format reader for partner-shared TargetSmart files; public-only subset; licensed-column refusal at header time; synthetic shape-fixture | shipped (this PR) |
 | 2.2 — Suppressions workflow | Apply-suppressions task in the flow, mirroring the corrections workflow | next |
 | 2.3 — Cross-pipeline analytics | SQL joining `seb.meetings` (SEB decisions) to `voter.aggregates` (turnout/registration trends) | |
 | 2.4 — Public read API | The output surface from ADR-0001, with ADR-0005 (forthcoming) on the commercial-use prohibition | |
