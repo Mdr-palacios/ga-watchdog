@@ -48,7 +48,7 @@ This roadmap is honest about what exists, what's next, and what's hypothetical. 
 
 **Goal:** SQL views and reports that join SEB decisions to voter file changes. "What did the board decide, and what changed on the ground?"
 
-- [ ] `warehouse/queries/board-decisions-vs-registration-change.sql`
+- [x] `warehouse/queries/seb_voter_overlap.sql` — quarter × county × compliance-status × voter-status cross-pipeline view (shipped Phase 2.3); the temporal+geographic join shape, not a topical one. See [L09d](LESSONS.md) for why.
 - [ ] `warehouse/queries/special-meetings-correlation.sql`
 - [ ] Dashboard surface (Evidence or Datasette) that exposes the cross-cuts
 

@@ -33,6 +33,7 @@ from pipelines.seb_meetings.transforms.models import Meeting
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB_PATH = REPO_ROOT / "data" / "warehouse" / "ga_watchdog.duckdb"
 SCHEMA_DIR = REPO_ROOT / "warehouse" / "schema"
+QUERIES_DIR = REPO_ROOT / "warehouse" / "queries"
 
 
 @contextmanager
@@ -48,13 +49,39 @@ def connect(db_path: Path | None = None) -> Iterator[duckdb.DuckDBPyConnection]:
 
 
 def apply_schema(conn: duckdb.DuckDBPyConnection) -> list[str]:
-    """Run every `.sql` file under `warehouse/schema/`. Returns filenames applied.
+    """Apply schema files, then cross-pipeline query views. Returns filenames applied.
 
-    Files are executed in lexical order. Each file must be idempotent
-    (uses `CREATE ... IF NOT EXISTS`).
+    Schema files (`warehouse/schema/*.sql`) define per-pipeline tables and
+    pipeline-local views. They run first, in lexical order.
+
+    Query files (`warehouse/queries/*.sql`) define cross-pipeline analytic
+    views — anything that joins across the SEB and voter schemas. They run
+    second, also in lexical order. This separation is architectural: a
+    schema file MAY NOT reference another pipeline's tables, and a query
+    file MUST NOT define any base table (it composes views from the
+    schema files). See `warehouse/schema/seb.sql` line 4 and ADR-0004 Rule 4.
+
+    Both directories' files must be idempotent (use `CREATE ... IF NOT
+    EXISTS` for tables, `CREATE OR REPLACE` for views).
     """
     applied: list[str] = []
     for sql_path in sorted(SCHEMA_DIR.glob("*.sql")):
+        conn.execute(sql_path.read_text())
+        applied.append(sql_path.name)
+    applied.extend(apply_queries(conn))
+    return applied
+
+
+def apply_queries(conn: duckdb.DuckDBPyConnection) -> list[str]:
+    """Run every `.sql` file under `warehouse/queries/`. Returns filenames applied.
+
+    These define cross-pipeline analytic views in the `analytics` schema.
+    They are called automatically at the end of `apply_schema`; this
+    function is exposed separately so tests can verify the cross-pipeline
+    boundary in isolation.
+    """
+    applied: list[str] = []
+    for sql_path in sorted(QUERIES_DIR.glob("*.sql")):
         conn.execute(sql_path.read_text())
         applied.append(sql_path.name)
     return applied
