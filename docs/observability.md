@@ -89,13 +89,13 @@ Never use ERROR for events that are part of normal operation. A 404 from `GET /v
 We do not run Prometheus. We do not run a TSDB. The two questions metrics platforms answer ("what is the rate of X" and "what is the trend of Y") are answered here by:
 
 1. **Rate**: grep the structured logs over a time window. For the API: `vercel logs --since 1h | grep '"event":"request"' | wc -l`.
-2. **Trend**: the warehouse itself. Every ingest run inserts to `seb.meetings`, `voter.voters`, and an internal `pipeline_runs` table (TODO: add this — tracked in the L11 follow-up issue). A SQL query against the run table answers "how many meetings did we ingest per week for the last quarter" directly.
+2. **Trend**: the warehouse itself. Every ingest run inserts to `seb.meetings`, `voter.voters`, and an internal `pipeline_runs` table (TODO: add this — tracked in [#13](https://github.com/Mdr-palacios/ga-watchdog/issues/13)). A SQL query against the run table answers "how many meetings did we ingest per week for the last quarter" directly.
 
 This is intentional. Adding a metrics platform is a real maintenance commitment; we delay it until the questions we cannot answer with logs and SQL are concrete and frequent.
 
 ## Tracing
 
-We do not run distributed tracing. The pipelines are short and linear; the API is one process. If a request needs more debugging than its log line provides, add a `request_id` (generated at the middleware layer, propagated as a header) and log it on every line in that request's lifecycle. We don't have this today; it's a small follow-up if a real need surfaces.
+We do not run distributed tracing. The pipelines are short and linear; the API is one process. If a request needs more debugging than its log line provides, add a `request_id` (generated at the middleware layer, propagated as a header) and log it on every line in that request's lifecycle. We don't have this today; tracked in [#14](https://github.com/Mdr-palacios/ga-watchdog/issues/14).
 
 ## When to add an alert
 
@@ -111,11 +111,11 @@ Three runbooks exist today: `api-stale-data.md`, `rate-limit-firing.md`, `wareho
 
 ## Known drift (TODO list)
 
-Honest accounting of where the current codebase doesn't match this doc. Each item is a follow-up issue to file:
+Honest accounting of where the current codebase doesn't match this doc. Each item is a filed issue — see `gh issue list --label area:observability`.
 
-- [ ] `pipelines/seb_meetings/flows/ingest.py` uses `prefect_log.info("Seed counts: %s", seed_counts)` style. Should be `log.info("seed_complete", counts=seed_counts)`.
-- [ ] `pipelines/voter_file/flows/apply_suppressions.py` has the same drift.
-- [ ] No `pipeline_runs` table yet. Trend queries against ingest history are not possible until this lands.
-- [ ] No `request_id` propagation in the API.
+- [ ] `pipelines/seb_meetings/flows/ingest.py` uses `prefect_log.info("Seed counts: %s", seed_counts)` style. Should be `log.info("seed_complete", counts=seed_counts)`. [#11](https://github.com/Mdr-palacios/ga-watchdog/issues/11)
+- [ ] `pipelines/voter_file/flows/apply_suppressions.py` has the same drift. [#12](https://github.com/Mdr-palacios/ga-watchdog/issues/12)
+- [ ] No `pipeline_runs` table yet. Trend queries against ingest history are not possible until this lands. [#13](https://github.com/Mdr-palacios/ga-watchdog/issues/13)
+- [ ] No `request_id` propagation in the API. [#14](https://github.com/Mdr-palacios/ga-watchdog/issues/14)
 
-None of these block correctness; all of them block this doc from being fully true. Tracked in `phase-2.4b` issue series.
+None of these block correctness; all of them block this doc from being fully true. The discipline of writing each one down as both a doc bullet *and* a tracked issue is itself a lesson — see [L12](teaching/LESSONS.md).
